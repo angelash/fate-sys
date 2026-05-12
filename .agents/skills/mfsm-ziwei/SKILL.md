@@ -21,10 +21,15 @@ python .agents/skills/mfsm-ziwei/scripts/scrape_mfsm_ziwei.py 1995-07-11 --gende
 ```text
 mfsm-YYYY-MM-DD-female-ziwei/
 ├── chart_html/
+├── bazi_chart_html/
 ├── raw_html/
+├── bazi_raw_html/
 ├── mfsm_YYYY-MM-DD_female_ziwei.json
 ├── mfsm_YYYY-MM-DD_female_ziwei.md
-└── mfsm_YYYY-MM-DD_female_ziwei_analysis_rows.csv
+├── mfsm_YYYY-MM-DD_female_ziwei_analysis_rows.csv
+├── mfsm_YYYY-MM-DD_female_bazi.json
+├── mfsm_YYYY-MM-DD_female_bazi.md
+└── mfsm_YYYY-MM-DD_female_bazi_summary.csv
 ```
 
 Do not place one-off scraper scripts inside analysis folders. Put reusable scraping or parsing logic in this skill's `scripts/` directory.
@@ -34,10 +39,12 @@ Do not place one-off scraper scripts inside analysis folders. Put reusable scrap
 - The date index page is `http://mfsm.kvov.com/fx/YYYY-MM-DD/`.
 - The index page contains time-slot links like `mfsms-1.html`, `mfsms-3.html`, ..., `mfsms-24.html`.
 - Zi Wei detail pages use `mfsmm-{time_code}-{gender_code}.html`.
+- Ba Zi chart pages use `bzmp-{time_code}-{gender_code}.html`.
 - Gender codes are `1` for male and `2` for female.
 - The script preserves the source HTML before parsing, then extracts:
   - Zi Wei analysis rows and confidence percentages.
   - The twelve-palace chart table.
+  - Ba Zi chart data: 坤/乾造, four pillars, 命宫, 胎元, 大运, 神煞, 旺衰, 纳音.
   - Chart metadata such as 五行局, 命主, 身主, 阳历, 农历, 时间, 性别.
   - Related links exposed by the page.
 
